@@ -4,7 +4,7 @@ module Sheets
 
     def call # rubocop:disable Metrics/AbcSize
       file_id = (context.record.site_id || 'unknown-site').to_s
-      filename = "#{file_id}-#{context.record.id}"
+      filename = "#{file_id}-#{context.record.file_name}"
 
       save_file!
       context.record.sheet_file.attach(
