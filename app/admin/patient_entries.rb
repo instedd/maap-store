@@ -1,6 +1,8 @@
 ActiveAdmin.register PatientEntry do
   actions :index, :show
 
+  includes :patient, :patient_location
+
   csv do
     column :id
     column :patient_id
@@ -29,4 +31,33 @@ ActiveAdmin.register PatientEntry do
     column :created_at
     column :updated_at
   end
+
+  filter :patient_id, label: 'Patient Id', filters: [:equals]
+  filter :patient_location
+  filter :department
+  filter :admission_date
+  filter :discharge_date
+  filter :weight
+  filter :height
+  filter :chief_complaint
+  filter :patient_transferred
+  filter :primary_diagnosis
+  filter :primary_diagnosis_icd_code
+  filter :antibiotics_prescribed
+  filter :patient_was_on_an_indwelling_medical_device, label: 'On indwelling medical device'
+  filter :medical_device
+  filter :infection_acquisition
+  filter :discharge_diagnostic
+  filter :discharge_diagnostic_icd_code
+  filter :patient_outcome_at_discharge
+  filter :stay_timespan
+  filter :pregnancy_status
+  filter :premature_birth
+  filter :comorbidities
+  filter :antibiotic_when
+  filter :prescribed_antibiotics_list
+  filter :age_value
+  filter :age_unit
+  filter :created_at
+  filter :updated_at
 end

@@ -183,4 +183,64 @@ ActiveAdmin.register Site do
 
     actions
   end
+
+  filter :name
+  filter :address
+  filter :ownership
+  filter :has_pharmacy
+  filter :level
+  filter :has_hospital
+  filter :has_laboratory
+  filter :site_type
+  filter :available_beds
+  filter :outpatient_by_month
+  filter :services_served_by_lab
+  filter :has_patient_uid
+  filter :system_change
+  filter :has_infection_disease_department
+  filter :infectious_diseases_physicians
+  filter :infectious_diseases_nurses
+  filter :has_amr_comitee
+  filter :meet_frequency
+  filter :has_annual_antibiogram
+  filter :stew_team
+  filter :has_guideline_antibiotics
+  filter :has_av_spec_processed
+  filter :av_spec_processed
+  filter :av_spec_bacterial_grow
+  filter :last_visit
+  filter :registration_number
+  filter :registration_body
+  filter :has_cms
+  filter :location_type
+  filter :contact_name
+  filter :contact_designation
+  filter :contact_email
+  filter :contact_number
+  filter :record_keeping_system
+  filter :other_services
+  filter :is_specialty_hospital
+  filter :specialties
+  filter :other_specialties
+  filter :served_population_size
+  filter :average_patients_per_year
+  filter :average_icu_length_of_stay
+  filter :patient_uid_in_lab_records
+  filter :system_change_details
+  filter :av_spec_fungal_processed
+  filter :av_spec_fungal_grow
+  filter :frequented_community_pharmacies
+  filter :community_pharmacies_details
+  filter :pharmacy_contact_name
+  filter :pharmacy_contact_designation
+  filter :pharmacy_contact_email
+  filter :pharmacy_contact_number
+  filter :pharmacy_records_keeping
+  filter :pharmacy_data_extraction_records
+  filter :cms_dispatch_destinations
+  filter :cms_dispatch_frequency
+  filter :cms_collect_stock
+  filter :cms_facility_collector_details
+  filter :created_at
+  filter :updated_at
 end

@@ -1,7 +1,4 @@
 ActiveAdmin.register Antibiotic do
-  preserve_default_filters!
-  remove_filter :antibiotic_consumption_stats
-
   actions :index, :show, :new, :create, :edit, :update
   permit_params :name, :strength_value, :strength_unit, :form, :pack_size,
                 :brand
@@ -29,4 +26,13 @@ ActiveAdmin.register Antibiotic do
     column :created_at
     column :updated_at
   end
+
+  filter :name
+  filter :strength_value
+  filter :strength_unit
+  filter :form
+  filter :pack_size
+  filter :brand
+  filter :created_at
+  filter :updated_at
 end
