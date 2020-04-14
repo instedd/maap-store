@@ -22,7 +22,9 @@ ActiveAdmin.register LabRecordImport do
   end
 
   filter :site
+  filter :s3_file_path
   filter :file_name
   filter :error_message
+  filter :created_at
   filter :uploaded_at
 end

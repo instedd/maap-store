@@ -54,6 +54,7 @@ ActiveAdmin.register AntibioticConsumptionStat do
   filter :balance
   filter :recipient_facility
   filter :recipient_unit
+  filter :date
   filter :deleted_at
   filter :created_at
   filter :updated_at
