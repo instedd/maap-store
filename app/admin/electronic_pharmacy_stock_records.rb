@@ -24,8 +24,8 @@ ActiveAdmin.register ElectronicPharmacyStockRecord do
 
   filter :site
   filter :obfuscation_state
-  filter :s3_file_path
   filter :file_name
+  filter :header_row
   filter :error_message
   filter :created_at
   filter :uploaded_at
