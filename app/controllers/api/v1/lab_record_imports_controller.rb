@@ -3,13 +3,8 @@ module Api
     class LabRecordImportsController < ApplicationController
       def create # rubocop:disable Metrics/MethodLength
         lab_record_import = build_lab_record_import
-
         if lab_record_import.save
-          InsertLabRecordsWorker.perform_async(
-            lab_record_import.id,
-            params[:lab_records_attributes]
-          )
-
+          InsertLabRecordsWorker.perform_async(lab_record_import.id)
           render json: {
             id: lab_record_import.id,
             created_at: lab_record_import.created_at,
@@ -49,9 +44,8 @@ module Api
 
       def permitted_params # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity
         params.permit(
-          :name, :header_row, :data_rows_from, :data_rows_to, :sheet_file, :site_id, :file_name
+          :name, :header_row, :data_rows_from, :data_rows_to, :sheet_file, :site_id, :file_name, :lab_records_attributes_file, :rows_file
         ).tap do |whitelisted|
-          whitelisted[:rows] = params[:rows] if params[:rows]
           whitelisted[:columns] = params[:columns] if params[:columns]
           whitelisted[:patient_or_lab_record_id] = params[:patient_or_lab_record_id] if params[:patient_or_lab_record_id] # rubocop:disable Metrics/LineLength
           whitelisted[:phi] = params[:phi] if params[:phi]

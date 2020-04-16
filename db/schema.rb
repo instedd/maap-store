@@ -113,7 +113,6 @@ ActiveRecord::Schema.define(version: 2020_03_12_145304) do
     t.integer "header_row"
     t.integer "data_rows_from"
     t.integer "data_rows_to"
-    t.jsonb "rows"
     t.jsonb "columns"
     t.jsonb "patient_or_lab_record_id"
     t.jsonb "phi"

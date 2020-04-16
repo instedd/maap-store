@@ -1,6 +1,8 @@
 class LabRecordImport < ApplicationRecord
   belongs_to :site
   has_one_attached :sheet_file
+  has_one_attached :lab_records_attributes_file
+  has_one_attached :rows_file
   has_many :lab_records, dependent: :destroy
 
   # accepts_nested_attributes_for :lab_records
@@ -17,8 +19,8 @@ class LabRecordImport < ApplicationRecord
     patient_id_state == 'obfuscated'
   end
 
-  def rows
-    JSON[self[:rows]]
+  def read_rows
+    rows_file.attached? && rows_file.download
   end
 
   def columns
