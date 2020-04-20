@@ -19,6 +19,7 @@ class InsertLabRecordsWorker
       lab_record.site = lab_record_import.site
       lab_record.lab_record_import = lab_record_import
       next lab_record unless lab_record_import.patient_id_index
+
       lab_record.patient_id = lab_record.content[lab_record_import.patient_id_index]['w']
       lab_record.save
     end
