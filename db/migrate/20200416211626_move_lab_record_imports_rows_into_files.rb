@@ -5,10 +5,10 @@ class MoveLabRecordImportsRowsIntoFiles < ActiveRecord::Migration[5.2]
 
   def up
     LabRecordImport.all.each do |l|
-      # Don't create files unless there is content (!nil or !{})
+      # Avoid creating files when there isn't any content (nil or {})
       if l.rows && !l.rows.empty?
         rows_file = StringIO.new(l.rows)
-        l.rows_file.attach(io: rows_file, filename: "rows-lab-record-import-#{l.id}", content_type: 'application/json')
+        l.rows_file.attach(io: rows_file, filename: "rows.json", content_type: 'application/json')
       end
     end
   end

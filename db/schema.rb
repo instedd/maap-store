@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_12_145304) do
+ActiveRecord::Schema.define(version: 2020_04_20_153254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,7 +93,6 @@ ActiveRecord::Schema.define(version: 2020_03_12_145304) do
     t.integer "header_row"
     t.integer "data_rows_from"
     t.integer "data_rows_to"
-    t.jsonb "rows"
     t.jsonb "columns"
     t.jsonb "phi"
     t.jsonb "date"
