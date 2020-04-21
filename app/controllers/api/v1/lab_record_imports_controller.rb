@@ -21,7 +21,7 @@ module Api
           params: update_permitted_params
         )
 
-        if interactor.valid?
+        if interactor.success?
           render json: interactor.lab_record_import, status: :accepted
         else
           render json: interactor.errors, status: :unprocessable_entity
@@ -38,7 +38,7 @@ module Api
 
       def update_permitted_params
         params.tap do |whitelisted|
-          whitelisted[:rows] = params[:rows] if params[:rows]
+          whitelisted[:rows_file] = params[:rows_file] if params[:rows_file]
         end
       end
 

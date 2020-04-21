@@ -2,11 +2,12 @@ module LabRecordImports
   class Update
     include Interactor
 
-    def call
+    def call # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
       ActiveRecord::Base.transaction do
-        lab_record_import.update!(rows: params[:rows],
-                                  patient_id_state: :pending)
-        params.fetch(:rows, []).each_with_index do |row, index|
+        lab_record_import.rows_file.purge
+        lab_record_import.rows_file.attach(params[:rows_file])
+        lab_record_import.update!(patient_id_state: :pending)
+        JSON.parse(lab_record_import.rows_file.download).each_with_index do |row, index|
           lab_record_for_row(index).update(
             patient_id: row[patient_id_index]['w'],
             patient_id_state: 'pending'

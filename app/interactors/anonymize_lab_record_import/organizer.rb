@@ -6,7 +6,7 @@ module AnonymizeLabRecordImport
              AnonymizeLabRecordImport::ObfuscatePatientIds,
              Sheets::RemoveFields,
              Sheets::SaveSheet,
-             Sheets::PruneTableFields,
+             Sheets::PurgeRowsFile,
              S3::Upload
 
     def call # rubocop:disable AbcSize

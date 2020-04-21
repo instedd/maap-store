@@ -1,5 +1,5 @@
 module Sheets
-  class PruneTableFields
+  class PurgeRowsFile
     include Interactor
 
     def call # rubocop:disable Metrics/AbcSize
