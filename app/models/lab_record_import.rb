@@ -40,4 +40,8 @@ class LabRecordImport < ApplicationRecord
   def patient_id_index
     patient_or_lab_record_id.index('patientId').to_i
   end
+
+  def skip_obfuscation?
+    patient_or_lab_record_id.empty? || phi.empty?
+  end
 end

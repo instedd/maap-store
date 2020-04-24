@@ -5,10 +5,11 @@ module Api
         lab_record_import = build_lab_record_import
 
         if lab_record_import.save
-          InsertLabRecordsWorker.perform_async(
+          InsertLabRecordsWorker.perform_async( # rubocop:disable Style/MultilineIfModifier
             lab_record_import.id,
             params[:lab_records_attributes]
-          )
+          ) unless lab_record_import.skip_obfuscation?
+
           render json: {
             id: lab_record_import.id,
             created_at: lab_record_import.created_at,
@@ -36,7 +37,7 @@ module Api
 
       def build_lab_record_import
         lab_record_import = LabRecordImport.create(permitted_params)
-        lab_record_import.patient_id_state = :pending
+        lab_record_import.patient_id_state = lab_record_import.skip_obfuscation? ? 'obfuscated' : 'pending' # rubocop:disable Metrics/LineLength
         lab_record_import
       end
 
