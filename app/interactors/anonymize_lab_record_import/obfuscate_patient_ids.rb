@@ -5,7 +5,7 @@ module AnonymizeLabRecordImport
     include Interactor
 
     def call # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-      return unless context.patient_ids
+      return if !context.patient_ids || context.record.skip_obfuscation?
 
       header_cell =
         read_cell(

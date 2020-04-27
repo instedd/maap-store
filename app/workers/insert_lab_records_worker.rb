@@ -15,7 +15,9 @@ class InsertLabRecordsWorker
     JSON[@lab_records]
   end
 
-  def import_lab_records
+  def import_lab_records # rubocop:disable Metrics/AbcSize
+    return if lab_record_import.skip_obfuscation?
+
     parsed_records.each do |lab_record_attributes|
       lab_record = LabRecord.new(lab_record_attributes)
       lab_record.site = lab_record_import.site

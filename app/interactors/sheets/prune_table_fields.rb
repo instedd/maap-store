@@ -12,7 +12,7 @@ module Sheets
     private
 
     def send_to_obfuscated_state!
-      context.record[context.state_attribute] = :obfuscated if context.obfuscate_on_finish
+      context.record[context.state_attribute] = :obfuscated if context.obfuscate_on_finish || context.record.skip_obfuscation? # rubocop:disable Metrics/LineLength
     end
   end
 end

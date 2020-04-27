@@ -21,7 +21,7 @@ module Sheets
     }.freeze
 
     def call # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-      return if context.patient_ids
+      return if context.patient_ids || context.record.skip_obfuscation?
 
       (first_row..last_row).to_a.each do |row_number|
         columns_to_offuscate.each do |column_number|
