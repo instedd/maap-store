@@ -4,7 +4,8 @@ class ElectronicPharmacyStockRecord < ApplicationRecord
 
   enum obfuscation_state: {
     pending: 0,
-    obfuscated: 1
+    obfuscated: 1,
+    error: 2
   }
 
   def name
@@ -33,5 +34,9 @@ class ElectronicPharmacyStockRecord < ApplicationRecord
 
   def date
     JSON[self[:date]]
+  end
+
+  def skip_obfuscation?
+    phi.empty?
   end
 end
