@@ -10,19 +10,21 @@ class InsertLabRecordsWorker
 
   private
 
-  def import_lab_records # rubocop:disable Metrics/AbcSize
+  def import_lab_records # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     return if lab_record_import.skip_obfuscation?
 
-    lab_records_attributes = JSON.parse(lab_record_import.lab_records_attributes_file.download)
-    lab_records_attributes.each do |lab_record_attributes|
-      lab_record = LabRecord.new(lab_record_attributes)
-      lab_record.site = lab_record_import.site
-      lab_record.lab_record_import = lab_record_import
-      next lab_record unless lab_record_import.patient_id_index
+    lab_record_import.lab_records_attributes_file.download do |downloaded|
+      JSON.load(downloaded).each do |lab_record_attributes|
+        lab_record = LabRecord.new(lab_record_attributes)
+        lab_record.site = lab_record_import.site
+        lab_record.lab_record_import = lab_record_import
+        next lab_record unless lab_record_import.patient_id_index
 
-      lab_record.patient_id = lab_record.content[lab_record_import.patient_id_index]['w']
-      lab_record.save
+        lab_record.patient_id = lab_record.content[lab_record_import.patient_id_index]['w']
+        lab_record.save
+      end
     end
+
     lab_record_import.lab_records_attributes_file.purge_later
   end
 

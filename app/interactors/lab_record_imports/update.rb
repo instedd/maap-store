@@ -7,7 +7,10 @@ module LabRecordImports
         lab_record_import.rows_file.purge
         lab_record_import.rows_file.attach(params[:rows_file])
         lab_record_import.update!(patient_id_state: :pending)
-        JSON.parse(lab_record_import.rows_file.download).each_with_index do |row, index|
+        file = params[:rows_file].open
+        rows = JSON.load(file.read)
+        file.close
+        rows.each_with_index do |row, index|
           lab_record_for_row(index).update(
             patient_id: row[patient_id_index]['w'],
             patient_id_state: 'pending'

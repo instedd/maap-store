@@ -21,10 +21,6 @@ class ElectronicPharmacyStockRecord < ApplicationRecord
     obfuscation_state == 'error'
   end
 
-  def read_rows
-    rows_file.attached? && rows_file.download
-  end
-
   def columns
     JSON[self[:columns]]
   end

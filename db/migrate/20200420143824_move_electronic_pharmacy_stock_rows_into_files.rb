@@ -4,9 +4,9 @@ class MoveElectronicPharmacyStockRowsIntoFiles < ActiveRecord::Migration[5.2]
   end
 
   def up
-    ElectronicPharmacyStockRecord.all.each do |e|
+    ElectronicPharmacyStockRecord.find_each do |e|
       # Don't create files unless there is content (!nil or !{})
-      if e.rows && !e.rows.empty?
+      if e.rows.present?
         rows_file = StringIO.new(e.rows)
         e.rows_file.attach(io: rows_file, filename: "rows.json", content_type: 'application/json')
       end
