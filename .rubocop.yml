@@ -44,3 +44,6 @@ Metrics/LineLength:
 
 Security/JSONLoad:
   Enabled: false
+
+Security/Open:
+  Enabled: false
