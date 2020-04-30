@@ -4,7 +4,7 @@ module Sheets
   class RemoveFields
     include Interactor
 
-    OFFUSCATED_TEXT = 'Not available'.freeze
+    OBFUSCATED_TEXT = 'Not available'.freeze
     INVALID_DATE = 'Invalid date format'.freeze
     FORMATS = {
       'DD/MM/YYYY': '%d/%m/%Y',
@@ -24,8 +24,8 @@ module Sheets
       return if context.patient_ids || context.record.skip_obfuscation?
 
       (first_row..last_row).to_a.each do |row_number|
-        columns_to_offuscate.each do |column_number|
-          update_cell(row_number - 1, column_number, OFFUSCATED_TEXT)
+        columns_to_obfuscate.each do |column_number|
+          update_cell(row_number - 1, column_number, OBFUSCATED_TEXT)
         end
 
         date_columns.each do |column|
@@ -98,14 +98,14 @@ module Sheets
         context.record.date.each_with_index.select { |c| c[0] }
     end
 
-    def columns_to_offuscate # rubocop:disable Metrics/AbcSize
-      return @columns_to_offuscate if @columns_to_offuscate
+    def columns_to_obfuscate # rubocop:disable Metrics/AbcSize
+      return @columns_to_obfuscate if @columns_to_obfuscate
 
       if context.record.phi.is_a? Array
-        return @columns_to_offuscate =
+        return @columns_to_obfuscate =
                  context.record.phi.each_with_index.select { |c| c[0] }.map(&:last)
       end
-      @columns_to_offuscate =
+      @columns_to_obfuscate =
         context.record.phi.values.each_with_index.select { |c| c[0] }.map(&:last)
     end
 
