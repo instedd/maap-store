@@ -5,6 +5,6 @@ module ApplicationHelper
   # to read files from other sources (such as S3 or web)
   def json_from_active_storage_attachment(blob_key)
     path = ActiveStorage::Blob.service.send(:path_for, blob_key)
-    open(path) { |file| JSON.load(file) }
+    open(path, 'r') { |file| JSON.load(file) }
   end
 end

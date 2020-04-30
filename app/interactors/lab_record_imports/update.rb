@@ -10,7 +10,7 @@ module LabRecordImports
 
         # `open` operation inside parenthesis is performed to transform
         # an ActionDispatch::Http::UploadedFile into a File
-        rows = open(params[:rows_file].open) { |file| JSON.load(file) }
+        rows = open(params[:rows_file].open, 'r') { |file| JSON.load(file) }
         rows.each_with_index do |row, index|
           lab_record_for_row(index).update(
             patient_id: row[patient_id_index]['w'],
