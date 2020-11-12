@@ -41,9 +41,9 @@ CSV.foreach(
     name: row['name'].split.map(&:capitalize).join(' '),
     strength_value: row['strength_value'],
     strength_unit: row['strength_unit'],
-    form: row['form'].split.map(&:capitalize).join(' '),
-    pack_size: row['pack_size'].split.map(&:capitalize).join(' '),
-    brand: row['brand'].split.map(&:capitalize).join(' ')
+    form: (row['form']||"").split.map(&:capitalize).join(' '),
+    pack_size: (row['pack_size']||"").split.map(&:capitalize).join(' '),
+    brand: (row['brand']||"").split.map(&:capitalize).join(' ')
   )
 end
 
