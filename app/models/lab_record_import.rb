@@ -3,6 +3,8 @@ class LabRecordImport < ApplicationRecord
   has_one_attached :sheet_file
   has_one_attached :rows_file
   has_many :lab_records, dependent: :destroy
+  has_many :lab_record_imports_tags, dependent: :destroy
+  has_many :tags, through: :lab_record_imports_tags
 
   # accepts_nested_attributes_for :lab_records
 
