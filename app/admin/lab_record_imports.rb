@@ -1,5 +1,6 @@
 ActiveAdmin.register LabRecordImport do
-  actions :index, :show
+  actions :index, :edit, :update
+  permit_params :tags, tag_ids: []
 
   includes :site
 
@@ -17,8 +18,12 @@ ActiveAdmin.register LabRecordImport do
     column :header_row
     column :data_rows_from
     column :data_rows_to
+    column :tags
     column :error_message
     column :uploaded_at
+    column do |item|
+      [link_to('Edit tags', edit_admin_lab_record_import_path(item))]
+    end
   end
 
   filter :site
@@ -27,4 +32,12 @@ ActiveAdmin.register LabRecordImport do
   filter :error_message
   filter :created_at
   filter :uploaded_at
+
+  form title: 'Tags', :html => {:class => "tags_list"} do |f|
+    f.input :tags, as: :select, collection: Tag.all, multiple: true, label: false
+    f.actions do 
+      f.action :submit, as: :button, label: 'Update Tags'
+      f.action :cancel, :wrapper_html => { :class => 'cancel'}, label: 'Cancel'
+    end
+  end
 end
