@@ -16,10 +16,11 @@ ActiveAdmin.register Tag do
     def destroy
       tag = Tag.find(params[:id])
       if tag.destroy
-        redirect_to admin_tags_path, flash: { notice: "Tag successfully deleted" }
+        flash[:notice] = "Tag '#{tag.name}' successfully deleted"
       else
-        redirect_to admin_tags_path, flash: { error: "Couldn't delete tag. Is it currently being used by any Lab Record Import?" }
+        flash[:error] = "Couldn't delete tag '#{tag.name}'. Is it currently being used by any Lab Record Import?"
       end
+      redirect_to action: :index
     end
   end
 end
