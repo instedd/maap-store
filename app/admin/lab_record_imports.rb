@@ -21,8 +21,8 @@ ActiveAdmin.register LabRecordImport do
     column :tags
     column :error_message
     column :uploaded_at
-    column do |item|
-      [link_to('Edit tags', edit_admin_lab_record_import_path(item))]
+    if Tag.count > 0 && current_admin_user.admin?
+      actions 
     end
   end
 
