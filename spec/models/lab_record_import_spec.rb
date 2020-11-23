@@ -16,4 +16,7 @@ RSpec.describe LabRecordImport, type: :model do
   it 'obfuscates if both `patient_or_lab_record_id` and `phi` are non-empty' do
     expect(create(:lab_record_import).skip_obfuscation?).to eq(false)
   end
+
+  it { is_expected.to have_many(:tags).through(:lab_record_imports_tags) }
+  it { is_expected.to have_many(:lab_record_imports_tags).dependent(:destroy) }
 end

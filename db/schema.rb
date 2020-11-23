@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_20_153254) do
+ActiveRecord::Schema.define(version: 2020_11_17_224218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,6 +126,16 @@ ActiveRecord::Schema.define(version: 2020_04_20_153254) do
     t.datetime "uploaded_at"
     t.string "raw_error_message"
     t.index ["site_id"], name: "index_lab_record_imports_on_site_id"
+  end
+
+  create_table "lab_record_imports_tags", force: :cascade do |t|
+    t.bigint "lab_record_import_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lab_record_import_id", "tag_id"], name: "index_on_lab_record_import_id_and_tag_id", unique: true
+    t.index ["lab_record_import_id"], name: "index_lab_record_imports_tags_on_lab_record_import_id"
+    t.index ["tag_id"], name: "index_lab_record_imports_tags_on_tag_id"
   end
 
   create_table "lab_records", force: :cascade do |t|
@@ -269,6 +279,13 @@ ActiveRecord::Schema.define(version: 2020_04_20_153254) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -293,6 +310,8 @@ ActiveRecord::Schema.define(version: 2020_04_20_153254) do
   add_foreign_key "antibiotic_consumption_stats", "sites"
   add_foreign_key "electronic_pharmacy_stock_records", "sites"
   add_foreign_key "lab_record_imports", "sites"
+  add_foreign_key "lab_record_imports_tags", "lab_record_imports"
+  add_foreign_key "lab_record_imports_tags", "tags"
   add_foreign_key "lab_records", "lab_record_imports"
   add_foreign_key "lab_records", "sites"
   add_foreign_key "patient_entries", "patient_locations"
