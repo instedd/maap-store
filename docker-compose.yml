@@ -1,7 +1,6 @@
 version: "3.7"
 services:
   app:
-    restart: always
     ports:
       - 3000:3000
     build: 
@@ -20,7 +19,6 @@ services:
       REDIS_URL: redis://cache
 
   workers:
-    restart: always
     build: 
       context: .
       dockerfile: Dockerfile-dev
@@ -43,7 +41,6 @@ services:
 
   db:
     image: postgres:11.3
-    restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 11111111
