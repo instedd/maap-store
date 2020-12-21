@@ -7,7 +7,7 @@ module Pagination
       current_page: page,
       per_page: per_page,
       total_count: paginated_collection.total_count,
-      greather_updated_at: collection.maximum('updated_at')
+      greather_updated_at: paginated_collection.pluck(:updated_at).max
     }
   end
 
