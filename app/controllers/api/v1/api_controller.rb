@@ -15,7 +15,7 @@ module Api
       end
 
       def filter(collection)
-        original_scope = collection.order(id: :asc)
+        original_scope = collection.order(updated_at: :asc)
         if params[:updated_at_gth].present?
           s = original_scope.where(
             'date_trunc(\'milliseconds\', updated_at) > ?',

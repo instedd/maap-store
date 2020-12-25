@@ -1,6 +1,9 @@
 module Pagination
   def render_paginated(collection, *_args)
     paginated_collection = collection.page(page).per(per_page)
+    # greather_updated_at is just sent for legacy purposes.
+    # It's necessary for Collectors previous to 1.2.0:
+    # https://github.com/instedd/maap-collector/commit/04ce1ee301c2d44137ab754711afa6b5edddc19a
     render json: {
       items: serialized_collection(paginated_collection),
       total_pages: paginated_collection.total_pages,
