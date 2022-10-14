@@ -26,6 +26,8 @@ gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem 'spreadsheet'
 
+gem 'mimemagic', '~> 0.3.10'
+
 group :development, :test do
   gem 'dotenv-rails'
 

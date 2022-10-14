@@ -6,7 +6,7 @@ ADD Gemfile.lock /app/
 WORKDIR /app
 
 # Install required packages
-RUN apk add --no-cache build-base nodejs git mysql-dev postgresql-dev tzdata
+RUN apk add --no-cache build-base nodejs git mysql-dev postgresql-dev tzdata shared-mime-info
 
 # Upgrades bundler versions
 RUN gem install bundler
