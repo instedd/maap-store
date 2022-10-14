@@ -12,14 +12,13 @@ jobs:
         run: |
           docker-compose pull
           docker-compose build
-          docker-compose run --rm web bundle install
-          docker-compose run --rm web rake db:create db:migrate
-          docker-compose run --rm web rake db:test:prepare
+          docker-compose run --rm app rake db:create db:migrate
+          docker-compose run --rm app rake db:test:prepare
 
       - name: Run specs
         run: |
-          docker-compose run --rm web bundle exec rubocop
-          docker-compose run --rm web bundle exec rspec
+          docker-compose run --rm app bundle exec rubocop
+          docker-compose run --rm app bundle exec rspec
 
   build:
     needs: test
